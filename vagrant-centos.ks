@@ -1,14 +1,14 @@
 install
 text
 cdrom
-lang en_US.UTF-8
-keyboard us
+lang de_DE.UTF-8
+keyboard de
 network --onboot yes --device eth0 --bootproto dhcp --noipv6 --hostname vagrant-centos-6.vagrantup.com
 rootpw vagrant
 firewall --disabled
 authconfig --enableshadow --passalgo=sha512
 selinux --disabled
-timezone --utc America/Chicago
+timezone --utc Europe/Berlin
 zerombr
 clearpart --all
 part /boot --fstype=ext4 --size=512
@@ -43,7 +43,7 @@ EOF
 /bin/rmdir /mnt/vbox
 /usr/bin/gem install --no-ri --no-rdoc puppet
 /usr/sbin/groupadd -r puppet
-/usr/bin/gem install --no-ri --no-rdoc chef
+curl -L https://www.opscode.com/chef/install.sh | sudo bash
 /bin/mkdir /home/vagrant/.ssh
 /bin/chmod 700 /home/vagrant/.ssh
 /usr/bin/curl -o /home/vagrant/.ssh/id_rsa https://raw.github.com/mitchellh/vagrant/master/keys/vagrant
