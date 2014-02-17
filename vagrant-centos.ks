@@ -29,7 +29,7 @@ cp /etc/resolv.conf /mnt/sysimage/etc/resolv.conf
 %end
 
 %post
-/usr/bin/yum -y install sudo gcc "kernel-devel-$(uname -r)" make perl rubygems ruby-devel
+/usr/bin/yum -y install sudo nfs-utils gcc "kernel-devel-$(uname -r)" make perl rubygems ruby-devel
 /bin/cat << EOF > /etc/sudoers.d/wheel
 Defaults:%wheel env_keep += "SSH_AUTH_SOCK"
 Defaults:%wheel !requiretty
@@ -44,6 +44,7 @@ EOF
 /usr/bin/gem install --no-ri --no-rdoc puppet
 /usr/sbin/groupadd -r puppet
 curl -L https://www.opscode.com/chef/install.sh | sudo bash
+/usr/bin/gem install --no-ri --no-rdoc knife-solo
 /bin/mkdir /home/vagrant/.ssh
 /bin/chmod 700 /home/vagrant/.ssh
 /usr/bin/curl -o /home/vagrant/.ssh/id_rsa https://raw.github.com/mitchellh/vagrant/master/keys/vagrant
